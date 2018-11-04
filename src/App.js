@@ -11,7 +11,10 @@ class App extends Component {
     super();
     this.state = {
       venues: [], 
-      markers: []
+      markers: [],
+      updateState: obj => { //used to set the state from the sidebar when filtering
+        this.setState(obj);
+      }
     };
   }
 
@@ -20,12 +23,11 @@ class App extends Component {
     marker.isOpen = true; //when clicked, sets marker to isOpen
     this.setState({markers: Object.assign(this.state.markers, marker) }); 
     const venue = this.state.venues.find(venue => venue.id === marker.id); //matches the selected marker with the venue information
-    /*fsAPI.getVenue(marker.id) //call for venue information
+    fsAPI.getVenue(marker.id) //call for venue information
       .then(res => {
         const newVenue = Object.assign(venue, res.response.venue);
         this.setState({ venues: Object.assign(this.state.venues, newVenue)});
-        console.log(newVenue)
-      })*/
+      })
   };
 
   closeOpenWindow = () => {
@@ -37,7 +39,9 @@ class App extends Component {
   }
 
   handleListClick = venue => {
-    console.log(venue);
+    const marker = this.state.markers.find(marker => 
+      marker.id === venue.id);
+    this.markerClick(marker);
   }
 
   componentDidMount = () => {
@@ -70,7 +74,7 @@ class App extends Component {
         <h1> Old San Juan Food & Drink Map </h1>
       </div>
       
-      <Sidebar {...this.state}/>
+      <Sidebar {...this.state} handleListClick={this.handleListClick}/>
       <Map {...this.state} markerClick={this.markerClick}/>
 
     </div>
