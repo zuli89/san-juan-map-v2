@@ -10,11 +10,7 @@ html, body {
 
 }*/
 #map-loader {
-  height: 100vh;
-}
-
-#map > div {
-  top: 50px !important;
+  height: 95vh;
 }
 /*title*/
 
@@ -66,4 +62,25 @@ html, body {
   border: none;
   background-color: #cdcdcd;
   padding-left: 12px;
+}
+
+/* infow window*/
+
+#venue-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#venue-img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#venue-address,
+#venue-rating,
+#venue-price {
+  font-size: 16px;
+  text-align: center;
 }
