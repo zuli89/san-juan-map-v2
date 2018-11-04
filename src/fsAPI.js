@@ -7,8 +7,8 @@ class Helper {  //object to create search URL based on search paramaters
 
   static auth() {
     const keys = {
-      client_id: "EZHTIOH3GZHL2D2XATRNUIBLR0353FO5UBCCK0INPFHOJEWQ",
-      client_secret: "N4DJAQEZRIZ1RV2ZFA0MLDIVSL2EZKUEJLV5WKZBSBG0E5A3",
+      client_id: "0NC4AMLUJW5AN3MVOYHFEFRT2GJY5U3N4DDCKDIV2SLTQIPE",
+      client_secret: "AJBAKVDW52PT1XEH1LPSD4WZOLSG25NDCUA4FWGHZPQ1PNAP",
       v: "20181101"
     };
     return Object.keys(keys)

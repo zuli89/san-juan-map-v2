@@ -9,7 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      venues: [],
+      venues: [], 
       markers: []
     };
   }
@@ -42,7 +42,7 @@ class App extends Component {
       ll:'18.466080,-66.115531',
       radius : '450',
       categoryId : '4bf58dd8d48988d144941735,4bf58dd8d48988d1be941735,4bf58dd8d48988d116941735,4bf58dd8d48988d11e941735,4bf58dd8d48988d16d941735',
-      limit: 40
+      limit: 2
     })
     .then(results => {
       const {venues} = results.response;
