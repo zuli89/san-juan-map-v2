@@ -5,6 +5,7 @@ import Map from "./components/Map"
 import './App.css';
 
 
+
 class App extends Component {
   constructor() {
     super();
@@ -19,12 +20,12 @@ class App extends Component {
     marker.isOpen = true; //when clicked, sets marker to isOpen
     this.setState({markers: Object.assign(this.state.markers, marker) }); 
     const venue = this.state.venues.find(venue => venue.id === marker.id); //matches the selected marker with the venue information
-    fsAPI.getVenue(marker.id) //call for venue information
+    /*fsAPI.getVenue(marker.id) //call for venue information
       .then(res => {
         const newVenue = Object.assign(venue, res.response.venue);
         this.setState({ venues: Object.assign(this.state.venues, newVenue)});
         console.log(newVenue)
-      })
+      })*/
   };
 
   closeOpenWindow = () => {
@@ -35,7 +36,9 @@ class App extends Component {
     this.setState({markers: Object.assign(this.state.markers, markers) });
   }
 
-
+  handleListClick = venue => {
+    console.log(venue);
+  }
 
   componentDidMount = () => {
     fsAPI.search({ //calls search method for foursqaure API
@@ -67,7 +70,7 @@ class App extends Component {
         <h1> Old San Juan Food & Drink Map </h1>
       </div>
       
-      <Sidebar/>
+      <Sidebar {...this.state}/>
       <Map {...this.state} markerClick={this.markerClick}/>
 
     </div>
