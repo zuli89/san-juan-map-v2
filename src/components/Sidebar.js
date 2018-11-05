@@ -42,9 +42,9 @@ export class Sidebar extends Component {
   render() {
     return (
       <div id = 'sidebar'>
-        <span id='sidebar-title'>Points of Interest</span>
-        <p><input type="search" placeholder="Search.." id="search-bar" onChange={this.inputChange}></input></p>
-        <Venues {...this.props} handleListClick={this.props.handleListClick} venues={this.filterSidebar()} />
+        <span id='sidebar-title'> Restaurants and Bars </span>
+        <p><input type="search" id="search-bar"  aria-label="search text"  placeholder="Filter Venues..."  onChange={this.inputChange}></input></p>
+        <Venues {...this.props} handleListClick={this.props.handleListClick} venues={this.filterSidebar()} tabIndex="0" />
         
       </div>
     )

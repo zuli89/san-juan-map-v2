@@ -20,11 +20,11 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
         onClick={() => props.markerClick(marker)}>
           {marker.isOpen && venueInfo.bestPhoto && (<InfoWindow>
             <div id='info'>
-              <p id = "venue-name"> {venueInfo.name} </p>
-              <p id = "venue-rating"> <span className='item-desc'> Rating: </span>{`${venueInfo.rating}/10`}</p>
-              <p id = "venue-price"><span className='item-desc'> Price: </span> {venueInfo.price.message}</p>
-              <img id= "venue-img" src = {`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt ={`${venueInfo.name}`}/>
-              <p id = "venue-address">{venueInfo.location.address}</p>
+              <p id = "venue-name" tabIndex='1'> {venueInfo.name} </p>
+              <p id = "venue-rating" tabIndex='1'> <span className='item-desc'> Rating: </span>{`${venueInfo.rating}/10`}</p>
+              <p id = "venue-price" tabIndex='1'><span className='item-desc'> Price: </span> {venueInfo.price.message}</p>
+              <img id= "venue-img" tabIndex='1' src = {`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`} alt ={`photo of ${venueInfo.name}`}/>
+              <p id = "venue-address" tabIndex='1'>{venueInfo.location.address}</p>
             </div>
           </InfoWindow>
           )}

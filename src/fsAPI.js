@@ -1,11 +1,13 @@
 //FourSquare API request (https://www.youtube.com/watch?v=Dj5hzKBxCBI&t=648s&index=4&list=PL4rQq4MQP1crXuPtruu_eijgOUUXhcUCP)
 
-class Helper {  //object to create search URL based on search paramaters 
+class Helper {  
+  /*this object contains all the parts needed to put together an API request. 
+  each static function is used within the 'fetch' function to create a API request URL*/
   static baseURL(){
     return "https://api.foursquare.com/v2";
   }
 
-  static auth() {
+  static auth() { 
     const keys = {
       client_id: "EZHTIOH3GZHL2D2XATRNUIBLR0353FO5UBCCK0INPFHOJEWQ",
       client_secret: "N4DJAQEZRIZ1RV2ZFA0MLDIVSL2EZKUEJLV5WKZBSBG0E5A3",
@@ -15,7 +17,7 @@ class Helper {  //object to create search URL based on search paramaters
       .map(key => `${key}=${keys[key]}`)
       .join("&");
   }
-  static urlBuilder(parameters){
+  static urlBuilder(parameters){//this allows us to enter search parameters to when doing an API request
     if (!parameters){
       return ""
     }
@@ -29,12 +31,12 @@ class Helper {  //object to create search URL based on search paramaters
       Accept: 'application/json'
     };
   }
-  static simpleFetch(endpoint, method, parameters) {
+  static simpleFetch(endpoint, method, parameters) { 
     let requestData = {
       method,
       headers : Helper.headers()
     };
-    return fetch(
+    return fetch( //puts together API request url and response
       `${Helper.baseURL()}${endpoint}?${Helper.auth()}&${Helper.urlBuilder(parameters)}`,
       requestData  
       ).then(res => res.json())
@@ -42,10 +44,10 @@ class Helper {  //object to create search URL based on search paramaters
 }
 
 export default class SquareAPI {
-  static search(parameters) {
+  static search(parameters) { //method for searching venues
     return Helper.simpleFetch('/venues/search', "GET", parameters);
   }
-  static getVenue(VENUE_ID) {
+  static getVenue(VENUE_ID) { //mehtod for getting specific information on venues
     return Helper.simpleFetch(`/venues/${VENUE_ID}`, "GET")
   }
 }
