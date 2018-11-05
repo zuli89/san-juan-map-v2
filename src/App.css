@@ -85,6 +85,21 @@ html, body {
   text-align: center;
 }
 
+
+#venue-ratin {
+  background-color: turquoise;
+  width: 60%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.item-desc {
+  font-weight: bold;
+}
+
 /* venue list */
 
 .venue-list {
@@ -109,3 +124,6 @@ html, body {
   cursor: pointer;
 
 }
+
+/*test*/
+

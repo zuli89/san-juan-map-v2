@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import VenuesList from './VenuesList'
+import Venues from './Venues'
 
 
 export class Sidebar extends Component {
@@ -7,41 +7,44 @@ export class Sidebar extends Component {
   constructor(){
     super();
     this.state = {
-      query: ''
+      query: '',
+      venues: []
     };
   }
 
-  inputChange = e => {
+  inputChange = e => { //filters search bar input
     this.setState({query: e.target.value}); 
     //filter venues when typing and match it to correspondig marker
     const markers = this.props.venues.map(venue => { 
-      const matched = venue.name.toLowerCase().includes(e.target.value.toLowerCase());
-    const marker = this.props.markers.find(marker => marker.id === venue.id);
-      if (matched) {
-        marker.isVisible = true;
+      const matched = venue.name.toLowerCase().includes(e.target.value.toLowerCase());  //looks for match between venue name and typed input
+    const marker = this.props.markers.find(marker => marker.id === venue.id); //matches the marker corresponding to the venue
+      if (matched) { //if the venue name matches the input, marker is set to visible and it will render on map
+        marker.isVisible = true; 
       } else {
-        marker.isVisible = false;
+        marker.isVisible = false; //if no match is found, marker is set to not visible and it will not render
       } 
       return marker;
     });
     this.props.updateState({ markers });
-  }
+  };
 
+  filterSidebar = () => { //filters the venue list on sidebar based on search bar input
+    if (this.state.query.trim() !== "") { //will run if there is something typed
+      const venues = this.props.venues.filter(venue =>  // filters venues based on what is typed on search input
+        venue.name.toLowerCase().includes(this.state.query.toLowerCase())
+      );
+      return venues; //the filter results are returned
+    }
+    return this.props.venues; //else all venues are returned
+  };
   
 
   render() {
     return (
       <div id = 'sidebar'>
         <span id='sidebar-title'>Points of Interest</span>
-        
         <p><input type="search" placeholder="Search.." id="search-bar" onChange={this.inputChange}></input></p>
-
-
-        <ul className='venue-list'>
-          {this.props.venues && this.props.venues.map((venue,key)=>
-            <VenuesList key={key} {...venue} {...this.props} handleListClick={this.props.handleListClick}/>
-          )}
-        </ul>
+        <Venues {...this.props} handleListClick={this.props.handleListClick} venues={this.filterSidebar()} />
         
       </div>
     )

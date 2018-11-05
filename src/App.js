@@ -27,6 +27,9 @@ class App extends Component {
       .then(res => {
         const newVenue = Object.assign(venue, res.response.venue);
         this.setState({ venues: Object.assign(this.state.venues, newVenue)});
+      }).catch(error => {
+        console.log(error);
+        alert('Error loading venue data');
       })
   };
 
@@ -63,7 +66,12 @@ class App extends Component {
         }
       });
     this.setState({venues, markers});
+    })
+    .catch(error => {
+      console.log(error);
+      alert('Error loading page');
     });
+  
   }
   
 

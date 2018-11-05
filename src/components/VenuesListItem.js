@@ -5,7 +5,8 @@ export default class VenuesList extends Component {
     return (
       <li className='venue-list-item' onClick={()=>this.props.handleListClick(this.props)}>
         {this.props.name}
-       </li>
+      </li>
+      
     )
   }
 }
