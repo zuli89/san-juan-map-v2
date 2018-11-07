@@ -6,7 +6,7 @@ export default class Venues extends Component {
     return (
       <ul className='venue-list' tabIndex="0" aria-label="venueslist"> 
         {this.props.venues && this.props.venues.map((venue,key)=>
-        <VenuesListItem key={key} {...venue} {...this.props} handleListClick={this.props.handleListClick}/>
+        <VenuesListItem key={key} {...venue} {...this.props} handleListClick={this.props.handleListClick} />
         )}
       </ul>
     )

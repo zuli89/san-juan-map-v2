@@ -54,7 +54,7 @@ class App extends Component {
       radius : '450',  // search radius around center
       //I selected a number of category IDs to have more control on what was requested
       categoryId : '4bf58dd8d48988d144941735,4bf58dd8d48988d1be941735,4bf58dd8d48988d116941735,4bf58dd8d48988d11e941735,4bf58dd8d48988d16d941735',
-      limit: 2 //number of results
+      limit: 10 //number of results
     })
     .then(results => {
       const {venues} = results.response; 

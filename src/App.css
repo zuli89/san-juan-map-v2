@@ -86,8 +86,8 @@ html, body {
 }
 
 
-#venue-ratin {
-  background-color: turquoise;
+
+#venue-rating {
   width: 60%;
   display: block;
   margin-right: auto;
@@ -107,23 +107,53 @@ html, body {
   text-align: center;
   padding-left: 0;
   padding-bottom: 60px;
+  font-size: 18px;
 }
+
 
 .venue-list-item {
   padding: 8px 12px;
-  background-color: rgb(31, 197, 169);
+  color:#4d8f8f;
   border-radius: 8px;
   margin: 8px 12px;
-  -webkit-box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
-  -moz-box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
-  box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
+
 }
 
 .venue-list-item:hover {
-  background-color: rgb(24, 136, 125);
+  background-color: rgb(181, 212, 209);
   cursor: pointer;
+  /*-webkit-box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
+  -moz-box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
+  box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);*/
+}
+
+/*responsiveness*/
+
+@media screen and (max-width: 900px) {
+ #sidebar {
+   width: 25%;
+ }
+
+ #map {
+   margin-left: 25% !important;
+ }
 
 }
 
-/*test*/
+@media screen and (max-width: 660px) {
+  #title{
+    font-size: 26px;
+  }
+  #sidebar-title{
+    display: none;
+  }
 
+  .venue-list {
+    font-size: 16px;
+  }
+}
+
+
+@media screen and (max-width: 660px) {
+
+}

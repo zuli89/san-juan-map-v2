@@ -37,14 +37,22 @@ export class Sidebar extends Component {
     }
     return this.props.venues; //else all venues are returned
   };
+
+    
+  /*filterCategories = () => {
+    const restaurants =  this.state.venues.find(venue => 
+      venue.id.categories=== "4bf58dd8d48988d144941735");
+      console.log(restaurants);
+    }*/
   
+
 
   render() {
     return (
       <div id = 'sidebar'>
-        <span id='sidebar-title'> Restaurants and Bars </span>
+        <span id='sidebar-title' > Restaurants and Bars </span>
         <p><input type="search" id="search-bar"  aria-label="search text"  placeholder="Filter Venues..."  onChange={this.inputChange}></input></p>
-        <Venues {...this.props} handleListClick={this.props.handleListClick} venues={this.filterSidebar()} tabIndex="0" />
+        <Venues {...this.props}  handleListClick={this.props.handleListClick} venues={this.filterSidebar()} tabIndex="0" />
         
       </div>
     )
