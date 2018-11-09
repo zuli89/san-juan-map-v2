@@ -124,7 +124,7 @@ const MyMapComponent = withScriptjs(
                         src={`${venueInfo.bestPhoto.prefix}200x200${
                           venueInfo.bestPhoto.suffix
                         }`}
-                        alt={`photo of ${venueInfo.name}`}
+                        alt={`${venueInfo.name}`}
                       />
                       <p id="venue-address" tabIndex="1">
                         {venueInfo.location.address}

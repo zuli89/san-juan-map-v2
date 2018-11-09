@@ -7,8 +7,8 @@ export default class Venues extends Component {
       <ul className="venue-list" tabIndex="0" aria-label="venueslist">
         {this.props.venues &&
           this.props.venues.map((venue, key) => (
-            <VenuesListItem
-              closeMenu={this.props.closeMenu}
+            <VenuesListItem 
+              closeHandler = {this.closeHandler}
               key={key}
               {...venue}
               {...this.props}

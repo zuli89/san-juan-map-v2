@@ -5,11 +5,19 @@ import { push as Menu } from "react-burger-menu";
 export class Sidebar extends Component {
   constructor() {
     super();
+    this.closeHandler = this.closeHandler.bind(this)
     this.state = {
       query: "",
       venues: [],
-      menuOpen: false
+      menuOpen: false,
+      
     };
+  }
+
+  closeHandler(e) {  //helpr close menu when list item clicked
+    this.setState({
+      menuOpen: false
+    })
   }
 
   inputChange = e => {
@@ -44,14 +52,6 @@ export class Sidebar extends Component {
     return this.props.venues; //else all venues are returned
   };
 
-  //handleStateChange(state) {
-  //this.setState({ menuOpen: state.isOpen });
-  //}
-
-  closeMenu() {
-    this.setState({ menuOpen: false });
-  }
-
   /*filterCategories = () => {
     const restaurants =  this.state.venues.find(venue => 
       venue.id.categories=== "4bf58dd8d48988d144941735");
@@ -60,8 +60,8 @@ export class Sidebar extends Component {
 
   render() {
     return (
-      //<div id = 'sidebar'>
-      <Menu noOverlay isOpen={this.state.menuOpen}>
+      
+      <Menu className='sidebar' noOverlay isOpen={this.state.menuOpen}>
         <span id="sidebar-title"> Restaurants and Bars </span>
         <p>
           <input
@@ -74,13 +74,13 @@ export class Sidebar extends Component {
         </p>
         <Venues
           {...this.props}
-          closeMenu={this.closeMenu}
+          closeHandler = {this.closeHandler}
           handleListClick={this.props.handleListClick}
           venues={this.filterSidebar()}
           tabIndex="0"
         />
       </Menu>
-      //</div>
+      
     );
   }
 }
