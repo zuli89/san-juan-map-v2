@@ -15,7 +15,7 @@ const MyMapComponent = withScriptjs(
       defaultCenter={{ lat: 18.46608, lng: -66.115531 }}
       options={{
         scrollwheel: true,
-        styles: [
+        styles: [   //Map style
           {
             featureType: "landscape.natural",
             elementType: "geometry.fill",
@@ -60,7 +60,7 @@ const MyMapComponent = withScriptjs(
             elementType: "labels",
             stylers: [
               {
-                visibility: "off"
+                visibility: "on"
               }
             ]
           },

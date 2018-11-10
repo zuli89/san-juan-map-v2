@@ -9,12 +9,11 @@ export class Sidebar extends Component {
     this.state = {
       query: "",
       venues: [],
-      menuOpen: false,
-      
+      menuOpen: true
     };
   }
 
-  closeHandler(e) {  //helpr close menu when list item clicked
+  closeHandler() {  //helpr close menu when list item clicked
     this.setState({
       menuOpen: false
     })
@@ -57,12 +56,18 @@ export class Sidebar extends Component {
       venue.id.categories=== "4bf58dd8d48988d144941735");
       console.log(restaurants);
     }*/
+    handleStateChange (state) {
+      this.setState({menuOpen: state.isOpen})  
+    }
+
 
   render() {
+
+
     return (
       
-      <Menu className='sidebar' noOverlay isOpen={this.state.menuOpen}>
-        <span id="sidebar-title"> Restaurants and Bars </span>
+      <Menu className='sidebar' noOverlay isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)}>
+        <span id="sidebar-title"> Old San Juan Restaurants and Bars </span>
         <p>
           <input
             type="search"
