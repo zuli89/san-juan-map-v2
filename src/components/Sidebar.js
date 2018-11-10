@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import Venues from "./Venues";
 import { push as Menu } from "react-burger-menu";
 
+
 export class Sidebar extends Component {
   constructor() {
     super();
     this.closeHandler = this.closeHandler.bind(this)
     this.state = {
       query: "",
-      venues: [],
-      menuOpen: true
+      //venues: [],
+      menuOpen: true,
+      restaurant: true
     };
   }
 
@@ -43,21 +45,21 @@ export class Sidebar extends Component {
     //filters the venue list on sidebar based on search bar input
     if (this.state.query.trim() !== "") {
       //will run if there is something typed
-      const venues = this.props.venues.filter((
-        venue // filters venues based on what is typed on search input
-      ) => venue.name.toLowerCase().includes(this.state.query.toLowerCase()));
+      const venues = this.props.venues.filter(// filters venues based on what is typed on search input
+        venue => venue.name.toLowerCase().includes(this.state.query.toLowerCase()));
       return venues; //the filter results are returned
-    }
+    } 
     return this.props.venues; //else all venues are returned
   };
 
-  /*filterCategories = () => {
-    const restaurants =  this.state.venues.find(venue => 
-      venue.id.categories=== "4bf58dd8d48988d144941735");
-      console.log(restaurants);
-    }*/
-    
-    handleStateChange (state) {
+  //Idea for additional functionality (another filter basedon category),  still need to implement. 
+
+  /* filterCategories = () => {
+    const restaurant = this.props.venues.filter(venue => venue.categories[0].id === '4bf58dd8d48988d16d941735' || venue.categories[0].id === "4bf58dd8d48988d117941735" )
+    return restaurant;
+  }*/
+
+    handleStateChange (state) { //handles state change of sidebar (https://github.com/negomi/react-burger-menu/wiki/FAQ#i-want-to-control-the-open-state-programmatically-but-i-dont-understand-how-to-use-the-isopen-prop)
       this.setState({menuOpen: state.isOpen})  
     }
 

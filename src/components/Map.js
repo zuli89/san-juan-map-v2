@@ -90,14 +90,14 @@ const MyMapComponent = withScriptjs(
     >
       {props.markers &&
         props.markers
-          .filter(marker => marker.isVisible)
-          .map((marker, idx) => {
+          .filter(marker => marker.isVisible) //filters markers that are set to visible
+          .map((marker, index) => {
             const venueInfo = props.venues.find(
-              venue => venue.id === marker.id
+              venue => venue.id === marker.id //maatches markers with venue list
             );
             return (
               <Marker
-                key={idx}
+                key={index}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 animation={marker.isOpen ? google.maps.Animation.BOUNCE : null}
                 onClick={() => props.markerClick(marker)}
