@@ -43,7 +43,7 @@ class App extends Component {
     });
     this.setState({ markers: Object.assign(this.state.markers, markers) });
   };
-  
+
   //handles clicks on sidebar list
   handleListClick = venue => {
     const marker = this.state.markers.find(

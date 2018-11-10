@@ -56,6 +56,7 @@ export class Sidebar extends Component {
       venue.id.categories=== "4bf58dd8d48988d144941735");
       console.log(restaurants);
     }*/
+    
     handleStateChange (state) {
       this.setState({menuOpen: state.isOpen})  
     }
@@ -66,7 +67,8 @@ export class Sidebar extends Component {
 
     return (
       
-      <Menu className='sidebar' noOverlay isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)}>
+      <Menu className='sidebar' noOverlay isOpen={this.state.menuOpen} 
+      onStateChange={(state) => this.handleStateChange(state)}>
         <span id="sidebar-title"> Old San Juan Restaurants and Bars </span>
         <p>
           <input
