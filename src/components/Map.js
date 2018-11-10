@@ -93,17 +93,17 @@ const MyMapComponent = withScriptjs(
           .filter(marker => marker.isVisible) //shows only markers that are set to visible
           .map((marker, key) => {
             const venueData = props.venues.find(
-              venue => venue.id === marker.id //matches markers with venue list
+              venue => venue.id === marker.venueInfo.id //matches markers with venue list
             );
             return (
               <Marker
                 key={key}
-                position={{ lat: marker.lat, lng: marker.lng }}
+                position={{ lat: marker.venueInfo.location.lat, lng: marker.venueInfo.location.lng }}
                 animation={marker.isOpen ? google.maps.Animation.BOUNCE : null}
                 onClick={() => props.markerClick(marker)}
               >
-                {marker.isOpen && venueData.bestPhoto && (
-                  <InfoWindow>
+                {marker.isOpen && venueData.bestPhoto && ( //opens up infoWIndow
+                  <InfoWindow> 
                     <div id="info">
                       <p id="venue-name" tabIndex="1">{venueData.name}</p>
                       <p id="venue-rating" tabIndex="1"><span className="item-desc"> Rating: </span>{`${venueData.rating}/10`}</p>

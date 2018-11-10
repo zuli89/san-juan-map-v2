@@ -82,6 +82,39 @@ h1 {
   font-weight: bold;
 }
 
+button {
+  border: none;
+  background-color: transparent;
+  height:40px;
+  display: block;
+  margin-right:auto;
+  margin-left:auto;
+  font-size: 18px;
+  text-decoration: underline;
+  color: #4d8f8f;
+  cursor: pointer;
+  padding: 5px 12px;
+}
+
+button:hover{
+  color: rgb(165, 46, 125);
+  border-radius: 12px;
+}
+
+#sidebar-title,
+#cat-link {
+  text-align: center;
+  display: block;
+  color: rgb(76, 71, 75);
+  font-weight: bold;
+}
+
+.rest-icon {
+ height:60px;
+ padding: 10px 6px;
+ cursor: pointer;
+}
+
 /* venue list */
 
 .venue-list {
@@ -102,6 +135,7 @@ h1 {
 .venue-list-item:hover {
   background-color: rgb(181, 212, 209);
   cursor: pointer;
+  color: rgb(165, 46, 125);
   /*-webkit-box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
   -moz-box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);
   box-shadow: 0px 10px 8px -4px rgba(214,214,214,1);*/
@@ -207,6 +241,4 @@ h1 {
     font-size: 14px;
   }
 }
-
-
 

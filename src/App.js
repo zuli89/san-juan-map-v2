@@ -10,9 +10,9 @@ class App extends Component {
     this.state = {
       venues: [],
       markers: [],
-      updateState: marker => {
+      updateState: obj => {
         //used to set the state from the sidebar when filtering
-        this.setState(marker);
+        this.setState(obj);
       }
     };
   }
@@ -22,8 +22,8 @@ class App extends Component {
     this.closeOpenWindow(); //will close any windows that are already open
     marker.isOpen = true; //when clicked, sets marker to isOpen
     this.setState({ markers: Object.assign(this.state.markers, marker) });
-    const venue = this.state.venues.find(venue => venue.id === marker.id); //matches the selected marker with the venue information
-    getVenueInfo(marker.id).then(resp => {
+    const venue = this.state.venues.find(venue => venue.id === marker.venueInfo.id); //matches the selected marker with the venue information
+    getVenueInfo(marker.venueInfo.id).then(resp => {
         const updateVenue = Object.assign(venue, resp.response.venue); //creates new object based on response
         // updates the state of 'venues' with details ontained through venue API request:
         this.setState({ venues: Object.assign(this.state.venues, updateVenue) });
@@ -33,6 +33,7 @@ class App extends Component {
         console.log(error);
         alert("Error loading venue data");
       });
+      
   };
 
   //closes window when another marker is clicked
@@ -47,7 +48,7 @@ class App extends Component {
   //handles clicks on sidebar list
   handleListClick = venue => {
     const marker = this.state.markers.find(
-      (marker) => marker.id === venue.id //matches the marker with venue on list
+      (marker) => marker.venueInfo.id === venue.id //matches the marker with venue on list
     );
     this.markerClick(marker); // opens infowindow
   };
@@ -57,22 +58,20 @@ class App extends Component {
         const { venues } = results.response; //master list of venues
         //creates a copy of the results that will be used for rendering markers
         const markers = venues.map(venue => {  
-          //I tired maping over venues and adding an isVisible and isOpen elements instead of this, but for some reason it always maxed out my request limit
           return {
-            lat: venue.location.lat,
-            lng: venue.location.lng,
-            id: venue.id,
-            isVisible: true,
-            isOpen: false
+            venueInfo: venue, 
+            isVisible: true, //adds element to filter markers showing on map
+            isOpen: false //adds element to open up InfoWindow
           };
         });
-        this.setState({ venues, markers });
+        this.setState({ venues , markers });
       })
       .catch(error => {
         console.log(error);
         alert("Error loading venue information");
       });
   };
+
 
   render() {
     return (
