@@ -5,8 +5,7 @@ export default class Venues extends Component {
   render() {
     return (
       <ul className="venue-list" tabIndex="0" aria-label="venueslist">
-        {this.props.venues &&
-          this.props.venues.map((venue, key) => (
+        {this.props.venues.map((venue, key) => (
             <VenuesList
               key={key}
               {...venue}
