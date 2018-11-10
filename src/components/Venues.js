@@ -8,10 +8,10 @@ export default class Venues extends Component {
         {this.props.venues &&
           this.props.venues.map((venue, key) => (
             <VenuesList
-              closeHandler = {this.closeHandler}
               key={key}
               {...venue}
               {...this.props}
+              closeHandler = {this.closeHandler}
               handleListClick={this.props.handleListClick}
             />
           ))}

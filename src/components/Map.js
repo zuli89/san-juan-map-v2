@@ -90,14 +90,14 @@ const MyMapComponent = withScriptjs(
     >
       
         {props.markers
-          .filter(marker => marker.isVisible) //filters markers that are set to visible
-          .map((marker, index) => {
+          .filter(marker => marker.isVisible) //shows only markers that are set to visible
+          .map((marker, key) => {
             const venueData = props.venues.find(
-              venue => venue.id === marker.id //maatches markers with venue list
+              venue => venue.id === marker.id //matches markers with venue list
             );
             return (
               <Marker
-                key={index}
+                key={key}
                 position={{ lat: marker.lat, lng: marker.lng }}
                 animation={marker.isOpen ? google.maps.Animation.BOUNCE : null}
                 onClick={() => props.markerClick(marker)}
@@ -107,10 +107,10 @@ const MyMapComponent = withScriptjs(
                     <div id="info">
                       <p id="venue-name" tabIndex="1">{venueData.name}</p>
                       <p id="venue-rating" tabIndex="1"><span className="item-desc"> Rating: </span>{`${venueData.rating}/10`}</p>
-                      <p id="venue-price" tabIndex="1"><span className="item-desc"> Price: </span>{`${venueData.price.message}`}</p>
+                      <p id="venue-price" tabIndex="1"><span className="item-desc"> Price: </span> {`${venueData.price.message}`} </p>
                       <img id="venue-img" tabIndex="1" 
                         src={`${venueData.bestPhoto.prefix}200x200${venueData.bestPhoto.suffix}`} alt={`${venueData.name}`}/>
-                      <p id="venue-address" tabIndex="1">{venueData.location.address}</p>
+                      <p id="venue-address" tabIndex="1"> {venueData.location.address} </p>
                     </div>
                   </InfoWindow>
                 )}

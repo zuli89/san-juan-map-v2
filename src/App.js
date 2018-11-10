@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/SidebarMenu";
 import {searchVenues, getVenueInfo} from "./fsAPI";
 import Map from "./components/Map";
 import "./App.css";
@@ -55,7 +55,7 @@ class App extends Component {
   componentDidMount = () => {
     searchVenues().then(results => {
         const { venues } = results.response; //master list of venues
-        //creates a copy of the results that will be used for filtering
+        //creates a copy of the results that will be used for rendering markers
         const markers = venues.map(venue => {  
           //I tired maping over venues and adding an isVisible and isOpen elements instead of this, but for some reason it always maxed out my request limit
           return {
