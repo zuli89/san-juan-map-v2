@@ -88,11 +88,11 @@ const MyMapComponent = withScriptjs(
         ]
       }}
     >
-      {props.markers &&
-        props.markers
+      
+        {props.markers
           .filter(marker => marker.isVisible) //filters markers that are set to visible
           .map((marker, index) => {
-            const venueInfo = props.venues.find(
+            const venueData = props.venues.find(
               venue => venue.id === marker.id //maatches markers with venue list
             );
             return (
@@ -102,15 +102,15 @@ const MyMapComponent = withScriptjs(
                 animation={marker.isOpen ? google.maps.Animation.BOUNCE : null}
                 onClick={() => props.markerClick(marker)}
               >
-                {marker.isOpen && venueInfo.bestPhoto && (
+                {marker.isOpen && venueData.bestPhoto && (
                   <InfoWindow>
                     <div id="info">
-                      <p id="venue-name" tabIndex="1">{venueInfo.name}</p>
-                      <p id="venue-rating" tabIndex="1"><span className="item-desc"> Rating: </span>{`${venueInfo.rating}/10`}</p>
-                      <p id="venue-price" tabIndex="1"><span className="item-desc"> Price: </span>{`${venueInfo.price.message}`}</p>
+                      <p id="venue-name" tabIndex="1">{venueData.name}</p>
+                      <p id="venue-rating" tabIndex="1"><span className="item-desc"> Rating: </span>{`${venueData.rating}/10`}</p>
+                      <p id="venue-price" tabIndex="1"><span className="item-desc"> Price: </span>{`${venueData.price.message}`}</p>
                       <img id="venue-img" tabIndex="1" 
-                        src={`${venueInfo.bestPhoto.prefix}200x200${venueInfo.bestPhoto.suffix}`}alt={`${venueInfo.name}`}/>
-                      <p id="venue-address" tabIndex="1">{venueInfo.location.address}</p>
+                        src={`${venueData.bestPhoto.prefix}200x200${venueData.bestPhoto.suffix}`} alt={`${venueData.name}`}/>
+                      <p id="venue-address" tabIndex="1">{venueData.location.address}</p>
                     </div>
                   </InfoWindow>
                 )}

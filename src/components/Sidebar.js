@@ -9,13 +9,11 @@ export class Sidebar extends Component {
     this.closeHandler = this.closeHandler.bind(this)
     this.state = {
       query: "",
-      //venues: [],
       menuOpen: true,
-      restaurant: true
     };
   }
 
-  closeHandler() {  //helpr close menu when list item clicked
+  closeHandler() {  //helps close menu when list item clicked
     this.setState({
       menuOpen: false
     })
@@ -26,16 +24,11 @@ export class Sidebar extends Component {
     this.setState({ query: e.target.value });
     //filter venues when typing and match it to correspondig marker
     const markers = this.props.venues.map(venue => {
-      const matched = venue.name
+      const findMatch = venue.name
         .toLowerCase()
         .includes(e.target.value.toLowerCase()); //looks for match between venue name and typed input
       const marker = this.props.markers.find(marker => marker.id === venue.id); //matches the marker corresponding to the venue
-      if (matched) {
-        //if the venue name matches the input, marker is set to visible and it will render on map
-        marker.isVisible = true;
-      } else {
-        marker.isVisible = false; //if no match is found, marker is set to not visible and it will not render
-      }
+      findMatch ? marker.isVisible = true :  marker.isVisible = false;
       return marker;
     });
     this.props.updateState({ markers });
@@ -48,11 +41,12 @@ export class Sidebar extends Component {
       const venues = this.props.venues.filter(// filters venues based on what is typed on search input
         venue => venue.name.toLowerCase().includes(this.state.query.toLowerCase()));
       return venues; //the filter results are returned
+    } else {
+      return this.props.venues; //else all venues are returned
     } 
-    return this.props.venues; //else all venues are returned
   };
 
-  //Idea for additional functionality (another filter basedon category),  still need to implement. 
+  //Idea for additional functionality (another filter based on category),  still need to implement. 
 
   /* filterCategories = () => {
     const restaurant = this.props.venues.filter(venue => venue.categories[0].id === '4bf58dd8d48988d16d941735' || venue.categories[0].id === "4bf58dd8d48988d117941735" )

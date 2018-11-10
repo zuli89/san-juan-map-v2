@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Sidebar from "./components/Sidebar";
-import SquareAPI from "./fsAPI";
+import {searchVenues, getVenueInfo} from "./fsAPI";
 import Map from "./components/Map";
 import "./App.css";
 
@@ -10,9 +10,9 @@ class App extends Component {
     this.state = {
       venues: [],
       markers: [],
-      updateState: obj => {
+      updateState: marker => {
         //used to set the state from the sidebar when filtering
-        this.setState(obj);
+        this.setState(marker);
       }
     };
   }
@@ -23,10 +23,10 @@ class App extends Component {
     marker.isOpen = true; //when clicked, sets marker to isOpen
     this.setState({ markers: Object.assign(this.state.markers, marker) });
     const venue = this.state.venues.find(venue => venue.id === marker.id); //matches the selected marker with the venue information
-    SquareAPI.getVenue(marker.id) //call for venue information
-      .then(res => {
-        const newVenue = Object.assign(venue, res.response.venue); //creates new object based on response
-        this.setState({ venues: Object.assign(this.state.venues, newVenue) }); // updates the state of 'venues' based on response
+    getVenueInfo(marker.id).then(resp => {
+        const updateVenue = Object.assign(venue, resp.response.venue); //creates new object based on response
+        // updates the state of 'venues' with details ontained through venue API request:
+        this.setState({ venues: Object.assign(this.state.venues, updateVenue) });
       })
       .catch(error => {
         //error handler
@@ -47,38 +47,30 @@ class App extends Component {
   //handles clicks on sidebar list
   handleListClick = venue => {
     const marker = this.state.markers.find(
-      (marker ) => marker.id === venue.id //matches the marker with venue on list
+      (marker) => marker.id === venue.id //matches the marker with venue on list
     );
     this.markerClick(marker); // opens infowindow
   };
 
   componentDidMount = () => {
-    SquareAPI.search({
-      //calls search method for foursqaure API
-      ll: "18.466080,-66.115531", //lat long center for search
-      radius: "450", // search radius around center
-      //I selected a number of category IDs to have more control on what was requested
-      categoryId:
-        "4bf58dd8d48988d144941735,4bf58dd8d48988d1be941735,4bf58dd8d48988d116941735,4bf58dd8d48988d11e941735,4bf58dd8d48988d16d941735",
-      limit: 15 //number of results
-    })
-  
-      .then(results => {
-        const { venues } = results.response;
-        const markers = venues.map(venue => {
+    searchVenues().then(results => {
+        const { venues } = results.response; //master list of venues
+        //creates a copy of the results that will be used for filtering
+        const markers = venues.map(venue => {  
+          //I tired maping over venues and adding an isVisible and isOpen elements instead of this, but for some reason it always maxed out my request limit
           return {
             lat: venue.location.lat,
             lng: venue.location.lng,
             id: venue.id,
-            isOpen: false,
-            isVisible: true
+            isVisible: true,
+            isOpen: false
           };
         });
         this.setState({ venues, markers });
       })
       .catch(error => {
         console.log(error);
-        alert("Error loading page");
+        alert("Error loading venue information");
       });
   };
 
@@ -86,7 +78,7 @@ class App extends Component {
     return (
       <div id="App">
         <Sidebar
-          pageWrapId={"page-wrap"}
+          pageWrapId={"page-wrap"} 
           outerContainerId={"App"}
           {...this.state}
           handleListClick={this.handleListClick}
