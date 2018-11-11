@@ -64,7 +64,8 @@ class App extends Component {
             isOpen: false //adds element to open up InfoWindow
           };
         });
-        this.setState({ venues , markers });
+        const markerCopy = markers;
+        this.setState({ venues , markers , markerCopy});
       })
       .catch(error => {
         console.log(error);

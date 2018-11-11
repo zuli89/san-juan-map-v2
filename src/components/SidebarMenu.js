@@ -36,6 +36,7 @@ export class Sidebar extends Component {
       findMatch ? marker.isVisible = true :  marker.isVisible = false;
       return marker;
     });
+    console.log(markers)
     this.props.updateState({ markers }); //updates markers arrays after filtering so markers don't show up if it's not at a location being searched for
   };
 
