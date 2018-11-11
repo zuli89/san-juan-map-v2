@@ -110,10 +110,12 @@ button:hover{
 }
 
 .icon {
- height:60px;
- padding: 10px 6px;
- cursor: pointer;
+  height:60px;
+  padding: 10px 6px;
+  cursor: pointer;
+
 }
+
 
 /* venue list */
 
@@ -220,8 +222,13 @@ button:hover{
   .sidebar {
     width: 100% !important;
   }
-.venue-list {
+  .venue-list {
   font-size: 18px;
+  }
+
+  .icon {
+    height: 80px;
+    padding: 10px 12px;
   }
 }
 

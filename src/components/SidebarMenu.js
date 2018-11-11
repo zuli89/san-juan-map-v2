@@ -60,11 +60,16 @@ export class Sidebar extends Component {
     }
   }
 
+  resetMarkers = () => {
+    const markers = this.props.markerCopy
+    this.props.updateState({ markers })
+  }
+
   render() {
     return (
       <Menu className='sidebar' noOverlay isOpen={this.state.menuOpen} 
       onStateChange={(state) => this.handleStateChange(state)}>
-      <button id='filter' onClick= {this.handleSidebars}>Change Filter Method</button>
+     <button id='filter' onClick= {() => {this.handleSidebars(); this.resetMarkers()}} >Change Filter Method</button>
 
       {this.state.textFilter && ( //Filters by input search only when textFilter is true
       <div id='text-filter'>

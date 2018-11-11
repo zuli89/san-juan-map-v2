@@ -88,11 +88,8 @@ export default class Categories extends Component {
   }
 
   resetMarkers = () => {
-    const markers = this.props.markerCopy.map(marker => {marker.isVisible = true;
-      console.log(markers)
-    return markers
-    });
-    //this.props.updateState({ markers })
+    const markers = this.props.markerCopy
+    this.props.updateState({ markers })
   }
 
     
@@ -100,16 +97,19 @@ export default class Categories extends Component {
   render() {
     return (
       <div id = 'categories-filter'>
-        <p id='cat-link' onClick={this.resetMarkers}> Filter by Category </p> 
-        <img className='icon' src={restaurant} 
-          onClick={() => {this.toggleRestaurant(); 
-          setTimeout(() => this.filterMarkers(), 300);
-          }
-        } 
-          alt='restaurant icon'/>
-        <img className='icon' src={coffee} onClick={() =>{ this.toggleCoffee(); setTimeout(() => this.filterMarkers(), 300) }} alt='coffee icon'/> 
-        <img className='icon' src={cocktail} onClick={ ()=> {this.toggleBars(); setTimeout(() => this.filterMarkers(), 300)}} alt='bars icon'/>
-
+        <p id='cat-link'> Filter by Category </p> 
+        <p id='icons>'>
+          <img className='icon' src={restaurant} 
+            onClick={() => {this.resetMarkers();
+              setTimeout(() => this.toggleRestaurant(), 1);
+        
+              setTimeout(() => this.filterMarkers(), 2);
+            }
+            } 
+            alt='restaurant icon'/>
+          <img className='icon' src={coffee} onClick={() =>{ this.resetMarkers(); setTimeout(() =>  this.toggleCoffee(), 1); setTimeout(() => this.filterMarkers(), 2) }} alt='coffee icon'/> 
+          <img className='icon' src={cocktail} onClick={ ()=> {  this.resetMarkers(); setTimeout(() => this.toggleBars(), 1); setTimeout(() => this.filterMarkers(), 2)}} alt='bars icon'/>
+        </p>
         <Venues
           {...this.props}
           closeHandler = {this.props.closeHandler}
