@@ -16,6 +16,7 @@ export default class Categories extends Component {
   }
 
 
+
   filterCategories = () => { //filters restaurants by category depending on state
     if (this.state.restaurant) {
       const venues = this.props.venues.filter(venue => venue.categories[0].id === '4bf58dd8d48988d144941735' || venue.categories[0].id === "4bf58dd8d48988d117941735" )
@@ -26,16 +27,15 @@ export default class Categories extends Component {
     } else {
       const venues = this.props.venues.filter(venue => venue.categories[0].id === '4bf58dd8d48988d11e941735' || venue.categories[0].id === "4bf58dd8d48988d116941735")
       return venues;
-    }
-    
+    } 
   }
 
   toggleRestaurant = () => {
     this.setState({
       restaurant: true,
       coffee: false,
-      bar: false
-    }) ;
+      bar: false, 
+    });
   }
 
   toggleCoffee= () => {
@@ -43,7 +43,7 @@ export default class Categories extends Component {
       restaurant: false,
       coffee: true,
       bar: false
-    }) ;
+    });
   }
 
   toggleBars= () => {
@@ -51,7 +51,7 @@ export default class Categories extends Component {
       restaurant: false,
       coffee: false,
       bar: true
-    }) ;
+    });
   }
 
     //handles clicks on sidebar list
@@ -60,31 +60,26 @@ export default class Categories extends Component {
         (marker) => marker.venueInfo.id === venue.id //matches the marker with venue on list
       );
       this.markerClick(marker); // opens infowindow
-    };
+    };  
 
-  /*inputChange = e => {
-    //filters search bar input
-    this.setState({ query: e.target.value });
-    //filter venues when typing and matches it to correspondig marker
-    const markers = this.props.venues.map(venue => {
-      const findMatch = venue.name.toLowerCase().includes(e.target.value.toLowerCase()); //looks for match between venue name and typed input
-      const marker = this.props.markers.find(marker => marker.venueInfo.id === venue.id); //matches the marker corresponding to the venue
-      findMatch ? marker.isVisible = true :  marker.isVisible = false;
-      return marker;
-    });
-    this.props.updateState({ markers }); //updates arkers arrays after filtering so markers don't show up if it's not at a location being searched for
-  };*/
-
-
-
+   /*filterMarkers = () => {
+      const venues = this.filterCategories();
+      const markers = venues.map(venue => {
+        const marker = this.props.markers.find(marker => marker.venueInfo.id === venue.id);
+        marker.isVisible = true;
+        console.log(marker)
+        return marker
+      });
+      this.props.updateState({ markers })
+    };*/
 
   render() {
     return (
       <div id = 'categories-filter'>
         <p id='cat-link'>Filter by Category</p> 
-        <img className='rest-icon' src={restaurant} onClick={this.toggleRestaurant}/>
-        <img className='rest-icon' src={coffee} onClick={this.toggleCoffee}/> 
-        <img className='rest-icon' src={cocktail} onClick={this.toggleBars}/> 
+        <img className='icon' src={restaurant} onClick={this.toggleRestaurant} alt='restaurant icon'/>
+        <img className='icon' src={coffee} onClick={this.toggleCoffee} alt='coffee icon'/> 
+        <img className='icon' src={cocktail} onClick={this.toggleBars} alt='bars icon'/> 
 
         <Venues
           {...this.props}

@@ -11,8 +11,8 @@ export class Sidebar extends Component {
     this.state = {
       query: "",
       menuOpen: true,
-      categories: true,
-      textFilter: false
+      categories: false,
+      textFilter: true
     };
   }
 
@@ -36,7 +36,7 @@ export class Sidebar extends Component {
       findMatch ? marker.isVisible = true :  marker.isVisible = false;
       return marker;
     });
-    this.props.updateState({ markers }); //updates arkers arrays after filtering so markers don't show up if it's not at a location being searched for
+    this.props.updateState({ markers }); //updates markers arrays after filtering so markers don't show up if it's not at a location being searched for
   };
 
   filterSidebar = () => {
@@ -51,9 +51,9 @@ export class Sidebar extends Component {
     } 
   };
 
-  handleSidebars = () => {
+  handleSidebars = () => { //used to switch between filtering options
     if (this.state.textFilter) {
-      this.setState ({textFilter: false, categories: true})
+      this.setState ({textFilter: false, categories: true}) 
     } else {
       this.setState ({textFilter: true, categories: false})
     }
@@ -65,7 +65,7 @@ export class Sidebar extends Component {
       onStateChange={(state) => this.handleStateChange(state)}>
       <button id='filter' onClick= {this.handleSidebars}>Change Filter Method</button>
 
-      {this.state.textFilter && ( //Filters by input search
+      {this.state.textFilter && ( //Filters by input search only when textFilter is true
       <div id='text-filter'>
         <span id="sidebar-title"> Filter by Name </span>
         <p>
@@ -95,5 +95,4 @@ export class Sidebar extends Component {
     );
   }
 }
-
 export default Sidebar;
