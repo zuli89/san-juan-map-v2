@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Neighborhood Map
 This application was developed to complete requirements of the Udacity Front End Web Development Nanodegree Program. 
-The application shows a neighborhood map with restaurants, bars, and coffee shops. It provides some information about each venue obtained using the Foursquare API.
+The application shows a neighborhood map with restaurants, bars, and coffee shops. The venues can be filtered by both categories and name. It provides some information about each venue obtained using the Foursquare API.
 
 #### Running the application
 
@@ -10,13 +10,13 @@ The application shows a neighborhood map with restaurants, bars, and coffee shop
 2. Navigate to the directory
 3. Install the dependencies with: `npm install`
 4. Start the app with  `npm start`
-5. Open localhost:3000
+5. Navigate to localhost:3000
 
 ##### Service Worker
 The service worker used is provided by create-react-app. It is only available when using the production build. Run the following on terminal:  
 1.  `npm run build`
 2.  `serve -s build`
-3. Open localhost:5000
+3. Navigate to localhost:5000
 
 ##### Resources and additional dependencies
 

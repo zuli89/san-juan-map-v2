@@ -36,7 +36,7 @@ export class Sidebar extends Component {
       findMatch ? marker.isVisible = true :  marker.isVisible = false;
       return marker;
     });
-    console.log(markers)
+    //console.log(markers)
     this.props.updateState({ markers }); //updates markers arrays after filtering so markers don't show up if it's not at a location being searched for
   };
 
@@ -60,7 +60,7 @@ export class Sidebar extends Component {
     }
   }
 
-  resetMarkers = () => {
+  resetMarkers = () => { //reset markers array when moving between sidebars
     const markers = this.props.markerCopy
     this.props.updateState({ markers })
   }
@@ -73,7 +73,7 @@ export class Sidebar extends Component {
 
       {this.state.textFilter && ( //Filters by input search only when textFilter is true
       <div id='text-filter'>
-        <span id="sidebar-title"> Filter by Name </span>
+        <span id="sidebar-title" tabIndex='0'> Filter by Name </span>
         <p>
           <input
             type="search"

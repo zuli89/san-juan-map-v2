@@ -18,7 +18,7 @@ export default class Categories extends Component {
 
 
 
-  filterCategories = () => { //filters restaurants by category depending on state
+  filterCategories = () => { //filters restaurants by category
     if (this.state.restaurant) {
       const venues = this.props.venues.filter(venue => venue.categories[0].id === '4bf58dd8d48988d144941735' || venue.categories[0].id === "4bf58dd8d48988d117941735" )
       return venues;
@@ -29,11 +29,12 @@ export default class Categories extends Component {
       const venues = this.props.venues.filter(venue => venue.categories[0].id === '4bf58dd8d48988d11e941735' || venue.categories[0].id === "4bf58dd8d48988d116941735")
       return venues;
     } else {
-      return this.props.venues
+      return this.props.venues //returns all if a filter is not selected
     }
   }
 
-  toggleRestaurant = () => {
+  //these three function set the state for elements needed to display each category 
+  toggleRestaurant = () => { 
     const marker = this.props.markers.filter(marker => marker.venueInfo.categories[0].id === '4bf58dd8d48988d144941735' || marker.venueInfo.categories[0].id === "4bf58dd8d48988d117941735" )
     this.setState({
       restaurant: true,
@@ -63,52 +64,40 @@ export default class Categories extends Component {
     });
   }
 
-  /*inputChange = e => {
-    //filters search bar input
-    this.setState({ query: e.target.value });
-    //filter venues when typing and matches it to correspondig marker
-    const markers = this.props.venues.map(venue => {
-      const findMatch = venue.name.toLowerCase().includes(e.target.value.toLowerCase()); //looks for match between venue name and typed input
-      const marker = this.props.markers.find(marker => marker.venueInfo.id === venue.id); //matches the marker corresponding to the venue
-      findMatch ? marker.isVisible = true :  marker.isVisible = false;
-      return marker;
-    });
-    this.props.updateState({ markers }); //updates markers arrays after filtering so markers don't show up if it's not at a location being searched for
-  };*/
-
+  //filters the markers based on selected category
   filterMarkers = () => {
-    const markers = this.state.markers.map(marker => {
+    const markers = this.state.markers.map(marker => { 
       const result = this.props.markers.find(m => m.venueInfo.id === marker.venueInfo.id); 
       marker.isVisiblie = true;
       //console.log(result)
     return result;
     });
     //console.log(markers)
-    this.props.updateState({ markers })
+    this.props.updateState({ markers }) //updates map markers by updating state of the original markers array
   }
 
+  //needed to reset the markers every time a new category is selected
   resetMarkers = () => {
     const markers = this.props.markerCopy
-    this.props.updateState({ markers })
+    this.props.updateState({ markers }) 
   }
-
-    
 
   render() {
     return (
       <div id = 'categories-filter'>
-        <p id='cat-link'> Filter by Category </p> 
+        <p id='cat-link' tabIndex='0'> Filter by Category </p> 
         <p id='icons>'>
-          <img className='icon' src={restaurant} 
+          <img className='icon' src={restaurant} aria-label='filter restaurant' role='button' tabIndex='0'
             onClick={() => {this.resetMarkers();
+              //Needed these three functions to run in a certain order, so I used setTimeout to make sure they did
+              // There has to be a better way to do this, but this works
               setTimeout(() => this.toggleRestaurant(), 1);
-        
               setTimeout(() => this.filterMarkers(), 2);
             }
             } 
             alt='restaurant icon'/>
-          <img className='icon' src={coffee} onClick={() =>{ this.resetMarkers(); setTimeout(() =>  this.toggleCoffee(), 1); setTimeout(() => this.filterMarkers(), 2) }} alt='coffee icon'/> 
-          <img className='icon' src={cocktail} onClick={ ()=> {  this.resetMarkers(); setTimeout(() => this.toggleBars(), 1); setTimeout(() => this.filterMarkers(), 2)}} alt='bars icon'/>
+          <img role='button' aria-label='filter coffee shop' tabIndex='0' className='icon' src={coffee} onClick={() =>{ this.resetMarkers(); setTimeout(() =>  this.toggleCoffee(), 1); setTimeout(() => this.filterMarkers(), 2) }} alt='coffee icon'/> 
+          <img role='button' aria-label='filter bars' tabIndex='0' className='icon' src={cocktail} onClick={ ()=> {  this.resetMarkers(); setTimeout(() => this.toggleBars(), 1); setTimeout(() => this.filterMarkers(), 2)}} alt='bars icon'/>
         </p>
         <Venues
           {...this.props}
